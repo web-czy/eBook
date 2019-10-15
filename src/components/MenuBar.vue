@@ -40,6 +40,9 @@ export default {
   methods: {
     toggleSettingShow() {
       this.ifSettingShow = !this.ifSettingShow
+    },
+    hideSettingShow() {
+      this.ifSettingShow = false
     }
   }
 }

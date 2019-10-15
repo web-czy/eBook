@@ -9,7 +9,7 @@
         <div class="right" @click="nextPage"></div>
       </div>
     </div>
-    <menu-bar :ifTitleAndMenuShow="ifTitleAndMenuShow"></menu-bar>
+    <menu-bar ref="menuBar" :ifTitleAndMenuShow="ifTitleAndMenuShow"></menu-bar>
   </div>
 </template>
 
@@ -29,6 +29,9 @@ export default {
   methods: {
     toggleTitleAndMenuShow() {
       this.ifTitleAndMenuShow = !this.ifTitleAndMenuShow
+      if (!this.ifTitleAndMenuShow) {
+        this.$refs.menuBar.hideSettingShow()
+      }
     },
     // 电子书的解析和渲染
     showEpub() {
