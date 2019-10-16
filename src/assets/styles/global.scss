@@ -34,11 +34,29 @@ $fontSize: 37.5;
 .slide-down-enter-active,
 .slide-down-leave-active,
 .slide-up-enter-active,
-.slide-up-leave-active {
+.slide-up-leave-active,
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.3s linear;
 }
 
 .slide-up-enter,
 .slide-up-leave-to {
-  transform: translate3d(0, 100%, 0);
+  // 之前位移100%，字号设置和menu高度不一致所以不太同步，
+  // 改为两数相加108，运动轨迹高度相同，就同步了
+  transform: translate3d(0, px2rem(108), 0);
+  -webkit-transform: translate3d(0, px2rem(108), 0);
+  -moz-transform: translate3d(0, px2rem(108), 0);
+  -ms-transform: translate3d(0, px2rem(108), 0);
+  -o-transform: translate3d(0, px2rem(108), 0);
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
 }
