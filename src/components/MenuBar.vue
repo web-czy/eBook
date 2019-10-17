@@ -7,7 +7,7 @@
         v-show="ifTitleAndMenuShow"
       >
         <div class="icon-wrapper">
-          <span class="iconfont icon-menu" @click="showContent"></span>
+          <span class="iconfont icon-menu" @click="showSetting(3)"></span>
         </div>
         <div class="icon-wrapper" @click="showSetting(2)">
           <span class="iconfont icon-progress"></span>
@@ -95,13 +95,18 @@
         </div>
       </div>
     </transition>
+    <content-view :ifShowContent="ifShowContent" v-show="ifShowContent" :navigation="navigation" :bookAvailable="bookAvailable" @jumpTo="jumpTo">
+    </content-view>
     <transition name="fade">
+      <!-- 黑色背景蒙版 -->
       <div class="content-mask" v-show="ifShowContent" @click="hideContent"></div>
     </transition>
   </div>
 </template>
 
 <script type='text/ecmascript-6'>
+import ContentView from './Content'
+
 export default {
   props: {
     ifTitleAndMenuShow: {
@@ -143,9 +148,6 @@ export default {
     }
   },
   methods: {
-    showContent() {
-      this.ifShowContent = true
-    },
     hideContent() {
       this.ifShowContent = false
     },
@@ -168,8 +170,13 @@ export default {
       this.$emit('setFontSize', fontSize)
     },
     showSetting(tag) {
-      this.ifSettingShow = true
       this.showTag = tag
+      if (this.showTag === 3) {
+        this.ifSettingShow = false
+        this.ifShowContent = true
+      } else {
+        this.ifSettingShow = true
+      }
     },
     hideSetting() {
       this.ifSettingShow = false
@@ -183,6 +190,9 @@ export default {
       this.deviation =
         (winWidth - previewWidth * 2) / (this.fontSizeList.length * 2) / 2 + 6
     }
+  },
+  components: {
+    ContentView
   }
 }
 </script>
